@@ -1,0 +1,5 @@
+# Netlify and Cloudflare Pages: redirects
+/contact        /contact-us/    301
+/contact/       /contact-us/    301
+/export-process /process/       301
+/export-process/ /process/      301

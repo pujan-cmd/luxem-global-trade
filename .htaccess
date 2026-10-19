@@ -1,0 +1,55 @@
+# =====================================================================
+#  Luxem Global Trade — Apache configuration (cPanel / shared hosting)
+#  Upload this file to the website root together with everything else.
+# =====================================================================
+
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+AddDefaultCharset UTF-8
+AddType application/manifest+json .webmanifest
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# --- 1) Force HTTPS: remove the leading "#" on the next 3 lines AFTER your SSL certificate is active ---
+#RewriteCond %{HTTPS} off
+#RewriteCond %{HTTP:X-Forwarded-Proto} !https
+#RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# --- 2) Use www.luxemglobaltrade.com as the single address (remove the "#" to enable) ---
+#RewriteCond %{HTTP_HOST} ^luxemglobaltrade\.com$ [NC]
+#RewriteRule ^ https://www.luxemglobaltrade.com%{REQUEST_URI} [L,R=301]
+
+# --- 3) Old / alternative addresses ---
+RewriteRule ^contact/?$ /contact-us/ [R=301,L]
+RewriteRule ^export-process/?$ /process/ [R=301,L]
+RewriteRule ^index\.html$ / [R=301,L]
+</IfModule>
+
+# --- Compression ---
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json application/xml application/manifest+json image/svg+xml
+</IfModule>
+
+# --- Browser caching (CSS/JS carry a ?v= version number, so long caching is safe) ---
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault "access plus 1 week"
+ExpiresByType text/html "access plus 0 seconds"
+ExpiresByType text/css "access plus 1 year"
+ExpiresByType application/javascript "access plus 1 year"
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType image/svg+xml "access plus 1 year"
+ExpiresByType image/x-icon "access plus 1 year"
+ExpiresByType application/xml "access plus 1 day"
+</IfModule>
+
+# --- Security headers ---
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>

@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment / secrets
+.env
+.env.*
+
+# Dependencies & build output (if ever added)
+node_modules/
+dist/
+.cache/
+
+# Deployment tooling
+.vercel/
+.netlify/
