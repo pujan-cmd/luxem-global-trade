@@ -13,13 +13,13 @@ AddType application/manifest+json .webmanifest
 RewriteEngine On
 
 # --- 1) Force HTTPS: remove the leading "#" on the next 3 lines AFTER your SSL certificate is active ---
-#RewriteCond %{HTTPS} off
-#RewriteCond %{HTTP:X-Forwarded-Proto} !https
-#RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # --- 2) Use www.luxemglobaltrade.com as the single address (remove the "#" to enable) ---
-#RewriteCond %{HTTP_HOST} ^luxemglobaltrade\.com$ [NC]
-#RewriteRule ^ https://www.luxemglobaltrade.com%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} ^luxemglobaltrade\.com$ [NC]
+RewriteRule ^ https://www.luxemglobaltrade.com%{REQUEST_URI} [L,R=301]
 
 # --- 3) Old / alternative addresses ---
 RewriteRule ^contact/?$ /contact-us/ [R=301,L]
